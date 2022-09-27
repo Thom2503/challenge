@@ -119,17 +119,17 @@ If you want to move on the board type Left, Right, Down or Forward.
 """
 
     the_right_moves = [
-        "forward",
-        "left",
-        "forward",
-        "forward",
-        "right",
-        "forward",
-        "right",
-        "right",
-        "foutregel",
-        "forward",
-        "down"
+        'forward',
+        'left',
+        'forward',
+        'forward',
+        'right',
+        'forward',
+        'right',
+        'right',
+        'foutregel',
+        'forward',
+        'down'
 ]
 
     print_words(start_landmineroom)
