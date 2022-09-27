@@ -5,7 +5,8 @@ current_room = ""
 current_items = {'chesspiece'   : False,
                  'shovel'       : False,
                  'wrench'       : False,
-                 'pocket knife' : False}
+                 'pocket knife' : False,
+                 'shovel'       :False}
 random_items = ['lighter', 'money', 'telephone']
 
 intro_text = """Welcome to the Observatory on top of the mountain,
@@ -92,7 +93,63 @@ your binary knowledge came in handy. Go to the Bridge.
             break
 
 
+def puzzle_landmine():
+    '''
+    you have made it to the hall. it seems like there are mines everywhere. maybe if we find the right way we can move past them.
+    '''
 
+    reddoor = """Finally you have made it to the Big Red door.
+You decide to walk into the room.
+Its dark and can't find the switch for the lights.
+After some time you find something that feels like a switch and you pull the lever.
+The room is complety empty.
+The hear some noise from the room where you came from.
+The martians have catched up and now holding you hostage.
+Their mothership have now abducted you and you will never see earth again...
+"""
+    bluedoor = """Finally you have made it to the Big Blue door.
+Lets hurry up before the martians are here.
+You know the Main gate is a little further.
+On the wall is a shovel take it with you it might come in handy.
+"""
+    start_landmineroom = """You're now in the hall.
+In front of you there is a board you decide to check it out.
+You are now right in front of the board. it has squares and you have to move over them.
+If you want to move on the board type Left, Right, Down or Forward.
+"""
+
+    the_right_moves = [
+        "forward",
+        "left",
+        "forward",
+        "forward",
+        "right",
+        "forward",
+        "right",
+        "right",
+        "foutregel",
+        "forward",
+        "down"
+]
+
+    print_words(start_landmineroom)
+    counter = 0 
+
+    while counter < 10:   
+        user_move = input("What move do you want to do.")
+        user_move = user_move.lower()
+        if user_move == the_right_moves[counter]:
+            print_words("Okay that worked what now.")
+            counter += 1
+        elif user_move == the_right_moves[9]:
+            print_words(reddoor)
+            #TODO: programma breaken
+        elif user_move == the_right_moves[10]:
+            print_words(bluedoor)
+            current_items['shovel'] = True
+            break
+        else:
+            print_words("BOOM you stepped on a mine try agian!")
 
 
 def main():
