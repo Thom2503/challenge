@@ -37,7 +37,11 @@ def lab_room():
 There's been a terrible accident with an expirement using the pods in the room.
 The martians in the pods have escaped and want to capture you to send you
 to their mother ship.
+While they are following you. you look outside it seems like everything still 
+the same the bridge still there.
+The three flower horses still there, but all the people are gone. 
 Escape now to the Main room, and go outside from the Locker room.
+If you need some help press H.
 """
     print_words(room_explenation)
     while True:
@@ -181,6 +185,28 @@ If you want to move on the board type Left, Right, Down or Forward.
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
 
+#TODO kijken of de namen kloppen
+def hint():
+
+    counter = 0
+
+    while counter == 0:
+        if input == "h":
+            if current_room == "main room":
+                print("Have you tried goin to the sound maybe someone can help you there.")
+            if current_room == "lab room":
+                print("Have you tried going back. Martians can be scary.")
+            if current_room == "locker room":
+                print("Have you tried opening the locker maybe somethings inside.")
+            if current_room == "hall":
+                print("Have you tried not stepping on a mine.\n  or remember the patern.")
+            if current_room == "main gate":
+                print("Have you tried opening the gate when you think it's right.")
+            if current_room == "bridge":   
+                print("Have you tried not falling to your death.")   
+            if current_room == "chessboard":  
+                print("Have you tried doing the first move you would set.")
+        
 
 def main():
     """
