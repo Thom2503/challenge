@@ -67,6 +67,7 @@ as a token.
 """
 
     print_words(room_explenation)
+    locker_open = False
     while True:
         command = input("> ")
         command = command.lower()
@@ -74,7 +75,8 @@ as a token.
             print_words(your_locker)
         elif command == "open coworkers locker":
             print_words(coworker_locker)
-        elif command == "pick up chesspiece":
+            locker_open = True
+        elif command == "pick up chesspiece" and locker_open:
             print_words("You picked up the chesspiece from your coworkers locker. Go to the Hall quickly.")
             current_items['chesspiece'] = True # je hebt nu het schaakstuk gepakt. Dit is optioneel
             break
