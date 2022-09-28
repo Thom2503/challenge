@@ -2,6 +2,7 @@ import time
 import sys
 
 current_room = "" # de huidige kamer waar je nu bent zodat je niet de hele game kan skippen
+not_valid = "Not a valid command" # error als je niet een goed commando doorgeeft
 # dictionary met de items die je nodig hebt. Als het op true staat heb je de item
 current_items = {'chesspiece'   : False,
                  'shovel'       : False,
@@ -181,6 +182,64 @@ If you want to move on the board type Left, Right, Down or Forward.
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
 
+def bridge():
+    """
+    Functie voor de brug, dit is een puzzel waar je op de correcte planken van de brug moet lopen.
+    Je kan dit 'overslaan' door je schep te gebruiken bij elke plank
+    """
+    room_explenation = """You have made it to the bridge, although it
+is not the bridge you remember. The bridge is partly broken, and it is a
+rope bridge now. Because the bridge is broken you have to choose the right
+planks to walk on. You can Skip 1 plank or Walk on it.
+"""
+    death_text = """"Unfortunatly you have stepped on the wrong plank.
+That was you short and sweet life, at least you were doing groundbreaking
+research that will help mankind someday.
+"""
+    cleared_room = """You have made it safely across the bridge, that was
+a tough one. You can hear the martians behind you, hurry to the weird Maze.
+"""
+    print_words(room_explenation)
+    # de correcte stappen om te nemen.
+    correct_planks = [True, False, True, True, True, False]
+    your_moves = []
+    i = 0
+    times_used = 0
+    # kan mooier dan alleen true
+    while True:
+        command = input("> ")
+        command = command.lower()
+        # je kan checken met je schep of het een plank veilig is
+        if command == "use shovel":
+            # het moet niet te OP zijn dus na twee keer hard drukken gaat het kapot
+            if times_used > 2:
+                print_words("You can't use the shovel because it broke...")
+                continue
+            # test of het een gebroken plank is
+            if correct_planks[i] is False:
+                print_words("The plank that you tested was a broken one,\nbeter Skip it!")
+            else:
+                print_words("The plank that you tested was not broken it's safe to Walk over!")
+            times_used += 1
+            continue
+        
+        if command == "skip":
+            your_moves.append(False)
+        elif command == "walk":
+            your_moves.append(True)
+        else:
+            print_words(not_valid)
+            continue
+        # check of je huidige move correct is
+        if your_moves[i] != correct_planks[i]:
+            print_words(death_text)
+            sys.exit("You lost the game!")
+        # als alle moves correct zijn ga dan door
+        if your_moves == correct_planks:
+            print_words(cleared_room)
+            break
+        i += 1
+
 
 def main():
     """
@@ -210,7 +269,11 @@ def main():
         elif current_room == "hall" and command == "go to main gate":
             current_room = "gate"
             main_gate()
-        print_words(command)
+        elif current_room == "gate" and command == "go to bridge":
+            current_room = "bridge"
+            bridge()
+        else:
+            print_words(not_valid)
 
 if __name__ == "__main__":
     main()
