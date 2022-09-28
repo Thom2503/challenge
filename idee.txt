@@ -2,5 +2,34 @@ observatorium op een punt van een berg
 onderzoekt naar marsmannetjes
 marsmannetjes ontsnappen
 puzzles doen om van de berg af te komen
-laatste puzzle een auto
+laatste puzzle een trekker
 met een schuur die allerlei tools heeft.
+
+Je bent een onderzoeker die naar mars onderzoekt met een collega.
+Je overkomt een ongeluk tijdens het experimenteren en na dat kom je er achter
+dat je van de berg moet ontsnappen want anders komen de marsmannetjes je
+halen met een ufo.
+
+puzzel idee:
+
+1: Soort van minesweeper boord waar je een bepaald met twee kanten eentje waar marsmannetjes je vast houden
+2: Code om een deur te openen door levers over te halen binair naar decimaal 
+3: brug met soms een verkeerde plank deze start het opnieuw
+4: schaakboord met missend stukje die in een van de kasten ligt en een goede eerste zet zetten
+5: trekker fixen met items in een schuur
+
+items:
+
+schaakstuk (token van collega)
+schep om elke plank te testen
+hammer om trekker te fixen
+zakmes
+random items : aansteker, geld, telefoon
+
+in een buffer room (waar je een soort pauze hebt) kom je gesneuvelde bergbeklimmers tegen,
+zij wilde naar een park gaan op het midden van de berg waar iets speciaals zou moeten zijn.
+
+Bij puzzel 4 kan er een grote lap tekst komen met daar een hint van wat de eerste zet zou
+kunnen zijn. 
+Schaakboord is in een soort van park waar de bergbeklimmers naar toe wilde gaan.
+
