@@ -1,5 +1,6 @@
 import time
 import sys
+import random
 
 current_room = "" # de huidige kamer waar je nu bent zodat je niet de hele game kan skippen
 not_valid = "Not a valid command" # error als je niet een goed commando doorgeeft
@@ -9,7 +10,7 @@ current_items = {'chesspiece'   : False,
                  'wrench'       : False,
                  'pocket knife' : False}
 # random item om de speler in de maling te nemen wat later in het spel
-random_items = ['lighter', 'money', 'telephone']
+random_items = ['lighter', '10 euro bill', 'telephone']
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
 intro_text = """Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
@@ -243,6 +244,35 @@ a tough one. You can hear the martians behind you, hurry to the weird Maze.
         i += 1
 
 
+def campsite():
+    """
+    Functie waar een klein verhaaltje wordt verteld over paar bergbeklimmers waar iets
+    mysterieus fout is gegaan waardoor alleen hun spullen en tenten enz. zijn achtergelaten.
+    De speler krijgt hier een random item en een wrench.
+    """
+    # dit is de random item die de speler krijgt.
+    random_item = random.choice(random_items)
+    current_items['wrench'] = True
+    
+    room_explenation = f"""From following the smoke you enter
+an abandoned campsite, with 3 tents, a fire with a stove and some gear.
+You look around for the mountain climbers but they have vanished.
+
+Pondering what to do you look arround in the tents to find some bags,
+you look in one and you find a {random_item} and a wrench. 
+Maybe this can be used.
+
+You look around some more to know for sure that the mountain climbers
+are gone but to no avail.
+
+The only thing you know is that there are martians coming after you,
+one is already audible so better move fast and go through some more
+Woods to the base of the mountain.
+"""
+    print_words(room_explenation)
+
+
+
 def main():
     """
     De main game loop waar eigenlijk alles gebeurt en wordt aangeroepen.
@@ -274,6 +304,9 @@ def main():
         elif current_room == "gate" and command == "go to bridge":
             current_room = "bridge"
             bridge()
+        elif current_room == "chessboard" and command == "go to campsite":
+            current_room = "campsite"
+            campsite()
         else:
             print_words(not_valid)
 
