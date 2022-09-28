@@ -1,4 +1,5 @@
 import time
+import sys
 
 current_room = "" # de huidige kamer waar je nu bent zodat je niet de hele game kan skippen
 # dictionary met de items die je nodig hebt. Als het op true staat heb je de item
@@ -170,13 +171,15 @@ If you want to move on the board type Left, Right, Down or Forward.
             counter += 1
         elif user_move == the_right_moves[9]:
             print_words(reddoor) # de rode deur is niet goed wat lijdt tot een dood einde
-            #TODO: programma breaken
+            # kan wat mooier maar de game moet afgesloten worden want dit is een einde voor de hoofdpersonage
+            sys.exit("You lost the game!")
         elif user_move == the_right_moves[10]:
             print_words(bluedoor)
             current_items['shovel'] = True # De shovel is een soort hulp bij de derde puzzel wat een foutieve brug is.
             break
         else:
             print_words("BOOM you stepped on a mine try agian!")
+            counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
 
 
 def main():
