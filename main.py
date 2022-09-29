@@ -1,4 +1,3 @@
-from glob import escape
 import time
 import sys
 import random
@@ -441,10 +440,10 @@ Now you can get in the Tractor and drive to Exit the Barn.
 
 
 def ending():
-    escaped_text = """You try countless times to stab the martian, but he
-blocks every attempt. After some time you begin to notice that he is easily
+    escaped_text = """You try countless times to stab the martian, but the martian
+blocks every attempt. After some time you begin to notice that the martian is easily
 distracted, so you say that there is a beatiful martian lady waiting for
-the martian in a bar. This makes the martian think.
+the martian in a bar. This makes the martian fantasize and distracted.
 
 Now is the time to stab the martian. You manage to grab the knife and stab the 
 martian in the neck, and push out of the Tractor. The others are too slow to 
@@ -469,6 +468,7 @@ When his story is over he says that you have seen too much and has to kill you. 
 You suddenly wake up, you think it was a dream, but you look around to see if you're in a familiar environment.
 This is not a familiar place, the room is shiny and with a lot of probes. You're on an operating table of the 
 martians. "Oh shit" you think.
+
 
 
       PART TWO COMING SPRING NEXT YEAR
