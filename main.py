@@ -12,18 +12,36 @@ current_items = {'chesspiece'   : False,
                  'pocket knife' : False}
 # random item om de speler in de maling te nemen wat later in het spel
 random_items = ['Lighter', '10 Euro Bill', 'Telephone']
+title = """
+ _______ _       __          __                   _   _           ____  _                              _                   
+|__   __| |      \ \        / /                  | | | |         / __ \| |                            | |                  
+   | |  | |__   __\ \  /\  / /_ _ _ __ ___  _ __ | |_| |__   ___| |  | | |__  ___  ___ _ ____   ____ _| |_ ___  _ __ _   _ 
+   | |  | '_ \ / _ \ \/  \/ / _` | '__/ _ \| '_ \| __| '_ \ / _ \ |  | | '_ \/ __|/ _ \ '__\ \ / / _` | __/ _ \| '__| | | |
+   | |  | | | |  __/\  /\  / (_| | | | (_) | | | | |_| | | |  __/ |__| | |_) \__ \  __/ |   \ V / (_| | || (_) | |  | |_| |
+   |_|  |_| |_|\___| \/  \/ \__,_|_|  \___/|_| |_|\__|_| |_|\___|\____/|_.__/|___/\___|_|    \_/ \__,_|\__\___/|_|   \__, |
+                                                                                                                      __/ |
+                                                                                                                     |___/
+By: Thom and Robin :)
+"""
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
-intro_text = """Welcome to the Observatory on top of the mountain,
+intro_text = f"""
+{title}
+
+Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
 This is the main room, there is a lab room and a locker room.
 You're hearing a strange sound coming from the Lab room go check it out!
-If you need some help press H.
+
+If you need some help press h or type help.
 """
 
-#TODO kijken of de namen kloppen
 def hint(room):
+    """
+    Functie om een hint te geven per ruimte.
+    @param string room - voor welke kamer de hint is
+    """
     if room == "main":
-        print_words("Have you tried goin to the sound maybe someone can help you there.")
+        print_words("Have you tried going to the sound maybe someone can help you there.")
     elif room == "lab":
         print_words("Have you tried going back. Martians can be scary.")
     elif room == "locker":
@@ -37,7 +55,8 @@ def hint(room):
     elif room == "chessboard":  
         print_words("Have you tried doing the first move you would set.")
     elif room == "barn":  
-        print_words("")
+        print_words("Have you tried looking around maybe you can find something.")
+
 
 def print_words(text):
     """
@@ -111,7 +130,6 @@ as a token.
         elif command == "pick up chesspiece" and locker_open:
             print_words("You picked up the chesspiece from your coworkers locker. Go to the Hall quickly.")
             current_items['chesspiece'] = True # je hebt nu het schaakstuk gepakt. Dit is optioneel
-            break
         elif command == "go to hall":
             print_words("You see a Square on the ground walk up to it.")
             break
@@ -211,7 +229,7 @@ If you want to move on the board type Left, Right, Down or Forward.
         if user_move == the_right_moves[counter]:
             print_words("Okay that worked what now.")
             counter += 1
-        elif counter == 9 and user_move == the_right_moves[9]:
+        elif counter == 6 and user_move == the_right_moves[9]:
             print_words(reddoor) # de rode deur is niet goed wat lijdt tot een dood einde
             # kan wat mooier maar de game moet afgesloten worden want dit is een einde voor de hoofdpersonage
             sys.exit("You lost the game!")
@@ -247,7 +265,8 @@ over it to find out where it's coming from.
         print_words(no_piece)
         sys.exit("You lost the game!")
     while counter == 0:
-        first_move = input("What first move do you want to set?")
+        print_words("What first move do you want to set?")
+        first_move = input("> ")
         #als de move f3 is dan kan je verder dit heb ik in het verhaal van dat als je wakker word gestopt
         if first_move in ("h", "help"):
             hint("chessboard")
@@ -288,8 +307,9 @@ a tough one. You can hear the martians behind you, hurry to the weird Maze.
     your_moves = []
     i = 0
     times_used = 0
+    bridge_len = len(correct_planks)
     # kan mooier dan alleen true
-    while True:
+    while i < bridge_len:
         command = input("> ")
         command = command.lower()
         if command in ("h", "help"):
@@ -324,6 +344,7 @@ a tough one. You can hear the martians behind you, hurry to the weird Maze.
         if your_moves == correct_planks:
             print_words(cleared_room)
             break
+        print_words(f"Good {bridge_len - i - 1} planks to go")
         i += 1
 
 
@@ -367,7 +388,7 @@ the only thing you can find is a somewhat old and rusted pocket knife.
 This can come in handy later...
 """
 
-    opened_hood = """You open the hood, the first thing you see is that the Transmission is broken. 
+    open_hood = """You open the hood, the first thing you see is that the Transmission is broken. 
 Maybe if you use the Tools you found you can Fix the Transmission.
 """
 
@@ -391,7 +412,7 @@ Now you can get in the Tractor and drive to Exit the Barn.
         elif command == "look around":
             print_words(looking)
         elif command == "open hood":
-            print_words(opened_hood)
+            print_words(open_hood)
             opened_hood = True
         elif command == "fix transmission" and opened_hood:
             print_words(fixing_transmission)
@@ -417,6 +438,7 @@ your being taken to mars.
 
       PART TWO COMING SPRING NEXT YEAR
     -= THE ESCAPE FROM THE MOTHERSHIP =-
+
 """
 
     awake_text = """The martian knocks the knife out of your hand. You stand no chance, he stronger, bigger, and smarter.
@@ -436,7 +458,7 @@ martians. "Oh shit" you think.
 
     random_end = escaped_text if random.randint(1,2) == 2 else awake_text
 
-    ending_text = """You're exiting the barn, you can hear some of
+    ending_text = f"""You're exiting the barn, you can hear some of
 the martians, and see them in your rear mirror. One is pretty fast which you didn't
 expect.
 
@@ -466,8 +488,12 @@ def main():
         # als je de game wilt eindigen.
         if command in ("q", "quit"):
             break
+        if command in ("h", "help"):
+            hint("main")
+            continue
         if current_room == "main" and command == "go to lab room":
             lab_room()
+            print_words("Good the Locker room is in sight. That's where the exit is.")
         elif current_room == "main" and command == "go to locker room":
             current_room = "locker"
             locker_room()
@@ -496,3 +522,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
