@@ -10,7 +10,7 @@ current_items = {'chesspiece'   : False,
                  'wrench'       : False,
                  'pocket knife' : False}
 # random item om de speler in de maling te nemen wat later in het spel
-random_items = ['lighter', '10 euro bill', 'telephone']
+random_items = ['Lighter', '10 Euro Bill', 'Telephone']
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
 intro_text = """Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
@@ -26,13 +26,13 @@ def hint(room):
     elif room == "lab":
         print_words("Have you tried going back. Martians can be scary.")
     elif room == "locker":
-        print_words("Have you tried opening the locker maybe somethings inside.")
+        print_words("Do you know that your coworker has a token?")
     elif room == "hall":
         print_words("Have you tried not stepping on a mine.\n  or remember the patern.")
     elif room == "main gate":
         print_words("Have you tried opening the gate when you think it's right.")
     elif room == "bridge":   
-        print_words("Have you tried not falling to your death.")   
+        print_words("Have you tried to remember what you found?")   
     elif room == "chessboard":  
         print_words("Have you tried doing the first move you would set.")
 
@@ -69,7 +69,7 @@ Escape now to the Main room, and go outside from the Locker room.
 
         if command in ("h", "help"):
             hint("lab")
-        if command == "go to main room":
+        elif command == "go to main room":
             break
 
 
@@ -81,6 +81,8 @@ def locker_room():
     """
     room_explenation = """You are in the locker room
 This room has 2 Lockers one for You and one for your Coworker.
+The martians are on your tail maybe go straight to the Hall,
+or check the Lockers, but maybe you don't have the time?
 """
     your_locker = """This is your locker, it has your bag and
 home clothes there is no time to change into those. There is 
@@ -96,8 +98,9 @@ as a token.
     while True:
         command = input("> ")
         command = command.lower()
-        command in ("h", "help")
-        if command == "open your locker":
+        if command in ("h", "help"):
+            hint("locker")
+        elif command == "open your locker":
             print_words(your_locker)
         elif command == "open coworkers locker":
             print_words(coworker_locker)
@@ -107,6 +110,7 @@ as a token.
             current_items['chesspiece'] = True # je hebt nu het schaakstuk gepakt. Dit is optioneel
             break
         elif command == "go to hall":
+            print_words("You see a Square on the ground walk up to it.")
             break
 
 
@@ -119,7 +123,7 @@ def main_gate():
 you must unlock it using 4 levers. The Levers are supposed to be bits
 and you remember the combination must mean 13 in decimal numbers.
 Pull the Levers to create a binary number that is equal to 13. 
-Try to open the gate.
+Try to Open the Gate.
 """
 
     room_cleared = """You have remembered the code correctly and
@@ -131,9 +135,10 @@ your binary knowledge came in handy. Go to the Bridge.
     while True:
         command = input("> ")
         command = command.lower()
-        command in ("h", "help")
+        if command in ("h", "help"):
+            hint("main gate")
         # als je een van deze kiest wordt die wissel naar True gezet
-        if command == "pull the first lever":
+        elif command == "pull the first lever":
             current_combo[0] = True
         elif command == "pull the second lever":
             current_combo[1] = True
@@ -167,8 +172,8 @@ Their mothership have now abducted you and you will never see earth again...
 """
     bluedoor = """Finally you have made it to the Big Blue door.
 Lets hurry up before the martians are here.
-You know the Main gate is a little further.
-On the wall is a shovel take it with you it might come in handy.
+You know the Main Gate is a little further.
+On the wall is a Shovel take it with you it might come in handy.
 """
     start_landmineroom = """You're now in the hall.
 In front of you there is a board you decide to check it out.
@@ -203,17 +208,59 @@ If you want to move on the board type Left, Right, Down or Forward.
         if user_move == the_right_moves[counter]:
             print_words("Okay that worked what now.")
             counter += 1
-        elif user_move == the_right_moves[9]:
+        elif counter == 9 and user_move == the_right_moves[9]:
             print_words(reddoor) # de rode deur is niet goed wat lijdt tot een dood einde
             # kan wat mooier maar de game moet afgesloten worden want dit is een einde voor de hoofdpersonage
             sys.exit("You lost the game!")
-        elif user_move == the_right_moves[10]:
+        elif counter == 8 and user_move == the_right_moves[10]:
             print_words(bluedoor)
             current_items['shovel'] = True # De shovel is een soort hulp bij de derde puzzel wat een foutieve brug is.
             break
         else:
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
+
+def chessboard():
+    introduction = """After the bridge you walked to the maze.
+Not a big one like you thought but you still needed to find your way thougth the bushes.
+You have found your way through this difficult maze and you see a chessboard.
+There is a sign next to it.
+'The Legendary Game of Chess'
+'You can only do one move to prove your worthy.'
+"""
+    no_piece = """The sign changed it's text suddenly,
+'You haven't looked in your Coworkers Locker, huh?'.
+The martians are now coming fastly towards you. With nowhere to go,
+you just wait out your luck and get captured by the martians.
+"""
+    outro = """You have proved that your worthy,
+The martians are coming you look around where to go next.
+In the distance you can see smoke of what appears to be a Campsite head 
+over it to find out where it's coming from.
+"""
+    print_words(introduction)
+    counter = 0
+    if current_items['chesspiece'] == False:
+        print_words(no_piece)
+        sys.exit("You lost the game!")
+    while counter == 0:
+        first_move = input("What first move do you want to set?")
+        #als de move f3 is dan kan je verder dit heb ik in het verhaal van dat als je wakker word gestopt
+        if first_move in ("h", "help"):
+            hint("chessboard")
+            continue
+        if first_move == "f3":
+            print_words(outro)
+            counter += 1
+        else:
+            print_words("The sign changed, 'your not worthy'. Try again.")
+        if counter == 10:
+            print_words("you see the martians run up to you, you have one and only one final guess make it a good one.")
+            if first_move == "f3":
+                print_words(outro)
+            else:
+                print_words("The martians have now abducted you to their mothership. \n Maybe you see the right move now.")
+        
 
 def bridge():
     """
@@ -242,10 +289,13 @@ a tough one. You can hear the martians behind you, hurry to the weird Maze.
     while True:
         command = input("> ")
         command = command.lower()
+        if command in ("h", "help"):
+            hint("bridge")
+            continue
         # je kan checken met je schep of het een plank veilig is
         if command == "use shovel":
             # het moet niet te OP zijn dus na twee keer hard drukken gaat het kapot
-            if times_used > 2:
+            if times_used == 2:
                 print_words("You can't use the shovel because it broke...")
                 continue
             # test of het een gebroken plank is
@@ -289,7 +339,7 @@ an abandoned campsite, with 3 tents, a fire with a stove and some gear.
 You look around for the mountain climbers but they have vanished.
 
 Pondering what to do you look arround in the tents to find some bags,
-you look in one and you find a {random_item} and a wrench. 
+you look in one and you find a {random_item} and a Wrench. 
 Maybe this can be used.
 
 You look around some more to know for sure that the mountain climbers
@@ -321,12 +371,11 @@ def main():
         if command in ("q", "quit"):
             break
         if current_room == "main" and command == "go to lab room":
-            current_room = "lab"
             lab_room()
         elif current_room == "main" and command == "go to locker room":
             current_room = "locker"
             locker_room()
-        elif current_room == "locker" and command == "go to hall":
+        elif current_room == "locker" and command == "go to square":
             current_room = "hall"
             puzzle_landmine()
         elif current_room == "hall" and command == "go to main gate":
@@ -335,6 +384,9 @@ def main():
         elif current_room == "gate" and command == "go to bridge":
             current_room = "bridge"
             bridge()
+        elif current_room == "bridge" and command == "go to maze":
+            current_room = "chessboard"
+            chessboard()
         elif current_room == "chessboard" and command == "go to campsite":
             current_room = "campsite"
             campsite()
