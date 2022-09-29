@@ -1,3 +1,4 @@
+from glob import escape
 import time
 import sys
 import random
@@ -35,6 +36,8 @@ def hint(room):
         print_words("Have you tried to remember what you found?")   
     elif room == "chessboard":  
         print_words("Have you tried doing the first move you would set.")
+    elif room == "barn":  
+        print_words("")
 
 def print_words(text):
     """
@@ -351,6 +354,99 @@ Woods to the base of the mountain.
 """
     print_words(room_explenation)
 
+def barn():
+    intro = """After some time walking you made it to the base of the mountain,
+wherer you see something that looks like a barn. You decide to enter it, inside are some Tools and a Tractor.
+You remember that is was supposed to be your Volvo V60.
+Maybe you can repair the Tractor to make sure you can leave this place as fast as possible.
+"""
+
+    looking = """You look around in the barn to look for
+extra useful items. There is a lot of junk. So naturally 
+the only thing you can find is a somewhat old and rusted pocket knife. 
+This can come in handy later...
+"""
+
+    opened_hood = """You open the hood, the first thing you see is that the Transmission is broken. 
+Maybe if you use the Tools you found you can Fix the Transmission.
+"""
+
+    fixing_transmission = """You remember that you picked up the Wrench from 
+the dissappeard mountain climbers. Using this Wrench you poke around to find the correct nut.
+Fastening the nut use the Wrench, after some difficulty, the Tranmission is working now.
+Now you can get in the Tractor and drive to Exit the Barn.
+"""
+
+    print_words(intro)
+    current_items['pocket knife'] = True
+    is_fixed = False
+    opened_hood = False
+    while is_fixed == False:
+        command = input("> ")
+        command = command.lower()
+
+        if command in ("h", "help"):
+            hint("barn")
+            continue
+        elif command == "look around":
+            print_words(looking)
+        elif command == "open hood":
+            print_words(opened_hood)
+            opened_hood = True
+        elif command == "fix transmission" and opened_hood:
+            print_words(fixing_transmission)
+            is_fixed = True
+        else:
+            print_words(not_valid)
+
+
+def ending():
+    escaped_text = """You try countless times to stab the martian, but he
+blocks every attempt. After some time you begin to notice that he is easily
+distracted, so you say that there is a beatiful martian lady waiting for
+the martian in a bar. This makes the martian think.
+
+Now is the time to stab the martian. You manage to grab the knife and stab the 
+martian in the neck, and push out of the Tractor. The others are too slow to 
+catch up and you escape.
+
+Only it's actually too late, their mothership has arrived and in one fell swoop
+your being taken to mars.
+
+
+
+      PART TWO COMING SPRING NEXT YEAR
+    -= THE ESCAPE FROM THE MOTHERSHIP =-
+"""
+
+    awake_text = """The martian knocks the knife out of your hand. You stand no chance, he stronger, bigger, and smarter.
+He gets in the Tractor and starts to scratch you. You lose control of the Tractor and crash into a tree.
+Before the martian will eat you he tells you a story about how his civilization will colonize and destroy earth 
+to use all of its inhabitants to gather materials.
+When his story is over he says that you have seen too much and has to kill you. It happens fast.
+
+You suddenly wake up, you think it was a dream, but you look around to see if you're in a familiar environment.
+This is not a familiar place, the room is shiny and with a lot of probes. You're on an operating table of the 
+martians. "Oh shit" you think.
+
+
+      PART TWO COMING SPRING NEXT YEAR
+    -= THE ESCAPE FROM THE MOTHERSHIP =-
+"""
+
+    random_end = escaped_text if random.randint(1,2) == 2 else awake_text
+
+    ending_text = """You're exiting the barn, you can hear some of
+the martians, and see them in your rear mirror. One is pretty fast which you didn't
+expect.
+
+He jumps with you in the Tractor and begins to attack you to stop the Tractor and 
+capture you. You take one hand from the steering wheel and you begin to grab for
+the old and rusted pocket knife. You begin to stab the martian.
+
+{random_end}
+"""
+    print_words(ending_text)
 
 
 def main():
@@ -390,6 +486,11 @@ def main():
         elif current_room == "chessboard" and command == "go to campsite":
             current_room = "campsite"
             campsite()
+        elif current_room == "campsite" and command == "go through woods":
+            current_room = "barn"
+            barn()
+        elif current_room == "barn" and command == "exit barn":
+            ending()
         else:
             print_words(not_valid)
 
