@@ -88,7 +88,13 @@ tussen elke plank zeggen hoeveel nog moet
 laatste geen skip
 brug tekst bij lab nog goed doen
 
-credits schrijven.
+credits schrijven. elke keer random
+Director
+Writer
+Artist
+Programmer
+visual effect editor
+creatures by
 
 Kunst voor het begin scherm
 
@@ -122,4 +128,4 @@ ____0_____0__\|/__@@@@__@@@__________|_\|/__|___\|/__\|/
 -'..._`.   `.   /`-._  "      "    |    _           |
        ```-..`./:::::)             `-...||______...-'    "
               /:::_.'     "        "                "
-           _.:.'''   "                       "             
+           _.:.'''   "                       "          SSt 

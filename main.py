@@ -11,6 +11,7 @@ current_items = {'chesspiece'   : False,
                  'pocket knife' : False}
 # random item om de speler in de maling te nemen wat later in het spel
 random_items = ['Lighter', '10 Euro Bill', 'Telephone']
+# the titel van de game -- inspiratie https://en.wikipedia.org/wiki/The_War_of_the_Worlds
 title = """
  _______ _       __          __                   _   _           ____  _                              _                   
 |__   __| |      \ \        / /                  | | | |         / __ \| |                            | |                  
@@ -22,13 +23,14 @@ title = """
                                                                                                                      |___/
 By: Thom and Robin :)
 """
-title_screen = """
+# mooi plaatje voor de intro
+title_image = """
                                        _..-,--.._
                                  ,`. ,',','      `.
                                  `. `,/`/          \
                                    :'.`:            :
         ____ _          _ __       | |`|            |
-      _(    `.)        ( (  )`.    : `-'            ;     
+      _(    `.)        ( (  )`.    : `-'            ;  
      ( (    ) ))      ( (    ))    ,\_            _/.  
     ( (   )  _)        `-(__.'    '.  ```------'''  .`
      '.__)--'       .-..           |``-...____...-''|
@@ -43,7 +45,7 @@ title_screen = """
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
 intro_text = f"""
 {title}
-{title_screen}
+{title_image}
 
 Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
@@ -52,6 +54,7 @@ You're hearing a strange sound coming from the Lab room go check it out!
 
 If you need some help press h or type help.
 """
+
 
 def hint(room):
     """
@@ -68,11 +71,11 @@ def hint(room):
         print_words("Have you tried not stepping on a mine.\n  or remember the patern.")
     elif room == "main gate":
         print_words("Have you tried opening the gate when you think it's right.")
-    elif room == "bridge":   
-        print_words("Have you tried to remember what you found?")   
-    elif room == "chessboard":  
+    elif room == "bridge":
+        print_words("Have you tried to remember what you found?")
+    elif room == "chessboard":
         print_words("Have you tried doing the first move you would set.")
-    elif room == "barn":  
+    elif room == "barn":
         print_words("Have you tried looking around maybe you can find something.")
 
 
@@ -97,10 +100,10 @@ def lab_room():
 There's been a terrible accident with an expirement using the pods in the room.
 The martians in the pods have escaped and want to capture you to send you
 to their mother ship.
-While they are following you. you look outside it seems like everything still 
-the same the bridge still there.
-The three flower horses still there, but all the people are gone. 
-Escape now to the Main room, and go outside from the Locker room.
+While they are following you, you can catch a glimpse of the outside world
+it looks oddly the same but feels very different.
+The three flower horses still there.
+Escape now to the Main room, and get out the building from the Locker room.
 """
     print_words(room_explenation)
     while True:
@@ -145,6 +148,7 @@ as a token.
         elif command == "open coworkers locker":
             print_words(coworker_locker)
             locker_open = True
+        # de locker moet open zijn om het schaakstukje te pakken
         elif command == "pick up chesspiece" and locker_open:
             print_words("You picked up the chesspiece from your coworkers locker. Go to the Hall quickly.")
             current_items['chesspiece'] = True # je hebt nu het schaakstuk gepakt. Dit is optioneel
@@ -235,15 +239,15 @@ If you want to move on the board type Left, Right, Down or Forward.
     ]
 
     print_words(start_landmineroom)
-    counter = 0 
-    
+    counter = 0
 
-    while counter < 10:  
+
+    while counter < 10:
         user_move = input("> ")
         user_move = user_move.lower()
         if user_move in ("h", "help"):
             hint("hall")
-            continue
+            continue # je hoeft niks meer te doen in de loop dus ga door
         if user_move == the_right_moves[counter]:
             print_words("Okay that worked what now.")
             counter += 1
@@ -258,6 +262,7 @@ If you want to move on the board type Left, Right, Down or Forward.
         else:
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
+
 
 def chessboard():
     introduction = """After the bridge you walked to the maze.
@@ -279,6 +284,7 @@ over it to find out where it's coming from.
 """
     print_words(introduction)
     counter = 0
+    # als je het schaakstukje in de locker niet heb gepakt kan je deze puzzel niet doen
     if current_items['chesspiece'] == False:
         print_words(no_piece)
         sys.exit("You lost the game!")
@@ -288,7 +294,7 @@ over it to find out where it's coming from.
         #als de move f3 is dan kan je verder dit heb ik in het verhaal van dat als je wakker word gestopt
         if first_move in ("h", "help"):
             hint("chessboard")
-            continue
+            continue # ook hier moet de rest van de loop niet gebeuren dus ga door
         if first_move == "f3":
             print_words(outro)
             counter += 1
@@ -300,7 +306,7 @@ over it to find out where it's coming from.
                 print_words(outro)
             else:
                 print_words("The martians have now abducted you to their mothership. \n Maybe you see the right move now.")
-        
+
 
 def bridge():
     """
@@ -412,7 +418,7 @@ Maybe if you use the Tools you found you can Fix the Transmission.
 
     fixing_transmission = """You remember that you picked up the Wrench from 
 the dissappeard mountain climbers. Using this Wrench you poke around to find the correct nut.
-Fastening the nut use the Wrench, after some difficulty, the Tranmission is working now.
+Fastening the nut using the Wrench, after some difficulty, the Tranmission is working now.
 Now you can get in the Tractor and drive to Exit the Barn.
 """
 
@@ -440,10 +446,10 @@ Now you can get in the Tractor and drive to Exit the Barn.
 
 
 def ending():
-    escaped_text = """You try countless times to stab the martian, but the martian
+    escaped_text = """You try countless times to stab the martian, but he
 blocks every attempt. After some time you begin to notice that the martian is easily
 distracted, so you say that there is a beatiful martian lady waiting for
-the martian in a bar. This makes the martian fantasize and distracted.
+him in a bar. This makes the martian fantasize and distracted.
 
 Now is the time to stab the martian. You manage to grab the knife and stab the 
 martian in the neck, and push out of the Tractor. The others are too slow to 
@@ -531,7 +537,7 @@ def main():
         elif current_room == "chessboard" and command == "go to campsite":
             current_room = "campsite"
             campsite()
-        elif current_room == "campsite" and command == "go through woods":
+        elif current_room == "campsite" and command == "go to woods":
             current_room = "barn"
             barn()
         elif current_room == "barn" and command == "exit barn":
@@ -541,4 +547,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
