@@ -23,9 +23,28 @@ title = """
                                                                                                                      |___/
 By: Thom and Robin :)
 """
+title_screen = """
+                                       _..-,--.._
+                                 ,`. ,',','      `.
+                                 `. `,/`/          \
+                                   :'.`:            :
+        ____ _          _ __       | |`|            |
+      _(    `.)        ( (  )`.    : `-'            ;     
+     ( (    ) ))      ( (    ))    ,\_            _/.  
+    ( (   )  _)        `-(__.'    '.  ```------'''  .`
+     '.__)--'       .-..           |``-...____...-''|
+                   (_)_))          |                |
+              ,'`.        ___...---|                |--..._
+  ,'`. ,'`. ,'   _`.---'''         |                | "
+-'..._`.   `.   /`-._  "      "    |    _           |
+       ```-..`./:::::)             `-...||______...-'    "
+              /:::_.'     "        "                "
+           _.:.'''   "                       "
+"""
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
 intro_text = f"""
 {title}
+{title_screen}
 
 Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
