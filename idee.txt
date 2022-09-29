@@ -33,3 +33,93 @@ Bij puzzel 4 kan er een grote lap tekst komen met daar een hint van wat de eerst
 kunnen zijn. 
 Schaakboord is in een soort van park waar de bergbeklimmers naar toe wilde gaan.
 
+main gate -> Main Gate
+open the gate -> Open the Gate
+shovel -> Shovel
+
+tekstje als move fout is bij schaakboord
+
+wrench -> Wrench
+lighter enzo -> Lighter
+
+auto (volvo v60) is nu mysterieus een trekker geworden
+
+Je wordt aan het einde wakker als je door een marsman wordt aangevallen.
+
+Schuur tekst dingetjes:
+
+Kijk in de motorklep waar je een kapotte versnelling ziet.
+
+looking = """You look around in the barn to look for
+extra useful items. There is a lot of junk. So naturally 
+the only thing you can find is a somewhat old and rusted pocket knife. 
+This can come in handy later...
+"""
+
+extra tekst aan het einde.
+
+escaped_text = """You try countless times to stab the martian, but he
+blocks every attempt. After some time you begin to notice that he is easily
+distracted, so you say that there is a beatiful martian lady waiting for
+the martian in a bar. This makes the martian think.
+
+Now is the time to stab the martian. You manage to grab the knife and stab the 
+martian in the neck, and push out of the tractor. The others are too slow to 
+catch up and you escape.
+
+Only it's actually too late, their mothership has arrived and in one fell swoop
+your being taken to mars.
+
+
+
+
+PART TWO COMING SPRING NEXT YEAR
+"""
+
+
+bugfixes
+dat je in de hall komt moet je ook weten dat waar je moet zijn.
+what move do you want to do first -> > en de tekst daar boven.
+split fout bij barn
+hints overal toevoegen
+go to main room met klein tekstje
+red door fixen
+tussen elke plank zeggen hoeveel nog moet
+laatste geen skip
+brug tekst bij lab nog goed doen
+
+credits schrijven.
+
+Kunst voor het begin scherm
+
+         *                 *                  *         
+                                                      * 
+                        *            *                  
+  *               *                                     
+        *              _________##                 *    
+                      @\\\\\\\\\##    *     |           
+  *                  @@@\\\\\\\\##\       \|/|/         
+                    @@ @@\\\\\\\\\\\    \|\\|//|/     * 
+             *     @@@@@@@\\\\\\\\\\\    \|\|/|/        
+                  @@@@@@@@@----------|    \\|//         
+       __         @@ @@@ @@__________|     \|/          
+  ____|_@|_       @@@@@@@@@__________|     \|/          
+=|__ _____ |=     @@@@ .@@@__________|      |           
+____0_____0__\|/__@@@@__@@@__________|_\|/__|___\|/__\|/
+
+                                       _..-,--.._
+                                 ,`. ,',','      `.
+                                 `. `,/`/          \
+                                   :'.`:            :
+        ____ _          _ __       | |`|            |
+      _(    `.)        ( (  )`.    : `-'            ;     _
+     ( (    ) ))      ( (    ))    ,\_            _/.  (`','
+    ( (   )  _)        `-(__.'    '.  ```------'''  .`
+     '.__)--'       .-..           |``-...____...-''|
+                   (_)_))          |                |
+              ,'`.        ___...---|                |--..._
+  ,'`. ,'`. ,'   _`.---'''         |                | "
+-'..._`.   `.   /`-._  "      "    |    _           |
+       ```-..`./:::::)             `-...||______...-'    "
+              /:::_.'     "        "                "
+           _.:.'''   "                       "             
