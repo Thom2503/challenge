@@ -16,7 +16,25 @@ intro_text = """Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
 This is the main room, there is a lab room and a locker room.
 You're hearing a strange sound coming from the Lab room go check it out!
+If you need some help press H.
 """
+
+#TODO kijken of de namen kloppen
+def hint(room):
+    if room == "main":
+        print_words("Have you tried goin to the sound maybe someone can help you there.")
+    elif room == "lab":
+        print_words("Have you tried going back. Martians can be scary.")
+    elif room == "locker":
+        print_words("Have you tried opening the locker maybe somethings inside.")
+    elif room == "hall":
+        print_words("Have you tried not stepping on a mine.\n  or remember the patern.")
+    elif room == "main gate":
+        print_words("Have you tried opening the gate when you think it's right.")
+    elif room == "bridge":   
+        print_words("Have you tried not falling to your death.")   
+    elif room == "chessboard":  
+        print_words("Have you tried doing the first move you would set.")
 
 def print_words(text):
     """
@@ -39,12 +57,18 @@ def lab_room():
 There's been a terrible accident with an expirement using the pods in the room.
 The martians in the pods have escaped and want to capture you to send you
 to their mother ship.
+While they are following you. you look outside it seems like everything still 
+the same the bridge still there.
+The three flower horses still there, but all the people are gone. 
 Escape now to the Main room, and go outside from the Locker room.
 """
     print_words(room_explenation)
     while True:
         command = input("> ")
         command = command.lower()
+
+        if command in ("h", "help"):
+            hint("lab")
         if command == "go to main room":
             break
 
@@ -72,6 +96,7 @@ as a token.
     while True:
         command = input("> ")
         command = command.lower()
+        command in ("h", "help")
         if command == "open your locker":
             print_words(your_locker)
         elif command == "open coworkers locker":
@@ -106,6 +131,7 @@ your binary knowledge came in handy. Go to the Bridge.
     while True:
         command = input("> ")
         command = command.lower()
+        command in ("h", "help")
         # als je een van deze kiest wordt die wissel naar True gezet
         if command == "pull the first lever":
             current_combo[0] = True
@@ -166,10 +192,14 @@ If you want to move on the board type Left, Right, Down or Forward.
 
     print_words(start_landmineroom)
     counter = 0 
+    
 
-    while counter < 10:   
+    while counter < 10:  
         user_move = input("> ")
         user_move = user_move.lower()
+        if user_move in ("h", "help"):
+            hint("hall")
+            continue
         if user_move == the_right_moves[counter]:
             print_words("Okay that worked what now.")
             counter += 1
@@ -195,8 +225,8 @@ is not the bridge you remember. The bridge is partly broken, and it is a
 rope bridge now. Because the bridge is broken you have to choose the right
 planks to walk on. You can Skip 1 plank or Walk on it.
 """
-    death_text = """"Unfortunatly you have stepped on the wrong plank.
-That was you short and sweet life, at least you were doing groundbreaking
+    death_text = """Unfortunatly you have stepped on the wrong plank.
+That was your short and sweet life, at least you were doing groundbreaking
 research that will help mankind someday.
 """
     cleared_room = """You have made it safely across the bridge, that was
@@ -209,7 +239,7 @@ a tough one. You can hear the martians behind you, hurry to the weird Maze.
     i = 0
     times_used = 0
     # kan mooier dan alleen true
-    while True:
+    while i < len(correct_planks) + 1:
         command = input("> ")
         command = command.lower()
         # je kan checken met je schep of het een plank veilig is
@@ -291,6 +321,7 @@ def main():
         if command in ("q", "quit"):
             break
         if current_room == "main" and command == "go to lab room":
+            current_room = "lab"
             lab_room()
         elif current_room == "main" and command == "go to locker room":
             current_room = "locker"
@@ -312,3 +343,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
