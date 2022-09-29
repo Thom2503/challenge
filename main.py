@@ -214,9 +214,6 @@ If you want to move on the board type Left, Right, Down or Forward.
         else:
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
-<<<<<<< HEAD
-        
-=======
 
 def bridge():
     """
@@ -305,7 +302,6 @@ Woods to the base of the mountain.
     print_words(room_explenation)
 
 
->>>>>>> a5a366a9fec58668af0932069e41dcc2249764d9
 
 def main():
     """
