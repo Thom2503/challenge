@@ -14,7 +14,25 @@ intro_text = """Welcome to the Observatory on top of the mountain,
 you're a researcher doing groundbreaking research on the planet Mars.
 This is the main room, there is a lab room and a locker room.
 You're hearing a strange sound coming from the Lab room go check it out!
+If you need some help press H.
 """
+
+#TODO kijken of de namen kloppen
+def hint(room):
+    if room == "main":
+        print_words("Have you tried goin to the sound maybe someone can help you there.")
+    elif room == "lab":
+        print_words("Have you tried going back. Martians can be scary.")
+    elif room == "locker":
+        print_words("Have you tried opening the locker maybe somethings inside.")
+    elif room == "hall":
+        print_words("Have you tried not stepping on a mine.\n  or remember the patern.")
+    elif room == "main gate":
+        print_words("Have you tried opening the gate when you think it's right.")
+    elif room == "bridge":   
+        print_words("Have you tried not falling to your death.")   
+    elif room == "chessboard":  
+        print_words("Have you tried doing the first move you would set.")
 
 def print_words(text):
     """
@@ -41,12 +59,14 @@ While they are following you. you look outside it seems like everything still
 the same the bridge still there.
 The three flower horses still there, but all the people are gone. 
 Escape now to the Main room, and go outside from the Locker room.
-If you need some help press H.
 """
     print_words(room_explenation)
     while True:
         command = input("> ")
         command = command.lower()
+
+        if command in ("h", "help"):
+            hint("lab")
         if command == "go to main room":
             break
 
@@ -73,6 +93,7 @@ as a token.
     while True:
         command = input("> ")
         command = command.lower()
+        command in ("h", "help")
         if command == "open your locker":
             print_words(your_locker)
         elif command == "open coworkers locker":
@@ -106,6 +127,7 @@ your binary knowledge came in handy. Go to the Bridge.
     while True:
         command = input("> ")
         command = command.lower()
+        command in ("h", "help")
         # als je een van deze kiest wordt die wissel naar True gezet
         if command == "pull the first lever":
             current_combo[0] = True
@@ -166,10 +188,14 @@ If you want to move on the board type Left, Right, Down or Forward.
 
     print_words(start_landmineroom)
     counter = 0 
+    
 
-    while counter < 10:   
+    while counter < 10:  
         user_move = input("> ")
         user_move = user_move.lower()
+        if user_move in ("h", "help"):
+            hint("hall")
+            continue
         if user_move == the_right_moves[counter]:
             print_words("Okay that worked what now.")
             counter += 1
@@ -184,28 +210,6 @@ If you want to move on the board type Left, Right, Down or Forward.
         else:
             print_words("BOOM you stepped on a mine try agian!")
             counter = 0 # zet de counter weer op 0 want je moet opnieuw proberen
-
-#TODO kijken of de namen kloppen
-def hint():
-
-    counter = 0
-
-    while counter == 0:
-        if input == "h":
-            if current_room == "main room":
-                print("Have you tried goin to the sound maybe someone can help you there.")
-            if current_room == "lab room":
-                print("Have you tried going back. Martians can be scary.")
-            if current_room == "locker room":
-                print("Have you tried opening the locker maybe somethings inside.")
-            if current_room == "hall":
-                print("Have you tried not stepping on a mine.\n  or remember the patern.")
-            if current_room == "main gate":
-                print("Have you tried opening the gate when you think it's right.")
-            if current_room == "bridge":   
-                print("Have you tried not falling to your death.")   
-            if current_room == "chessboard":  
-                print("Have you tried doing the first move you would set.")
         
 
 def main():
@@ -226,6 +230,7 @@ def main():
         if command in ("q", "quit"):
             break
         if current_room == "main" and command == "go to lab room":
+            current_room = "lab"
             lab_room()
         elif current_room == "main" and command == "go to locker room":
             current_room = "locker"
