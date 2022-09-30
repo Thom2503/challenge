@@ -55,6 +55,20 @@ You're hearing a strange sound coming from the Lab room go check it out!
 If you need some help press h or type help.
 """
 
+def characters():
+    gary = """Gary Fox
+strength: luck and strength
+weakness: spiders and heigths
+"""
+    Wallace = """Wallace Bennett
+strength: endurance and good with nature
+weakness: lazy and Not taking criticism well
+"""
+    print_words("choose your character")
+    print_words(gary)
+    print_words(Wallace)
+    player = input("type here what character you want to play")
+    print_words(f"good job {player} is just what we needed for this adventure")
 
 def hint(room):
     """
@@ -380,14 +394,14 @@ def campsite():
     """
     # dit is de random item die de speler krijgt.
     random_item = random.choice(random_items)
-    current_items['wrench'] = True
+    current_items['pocket knife'] = True
     
     room_explenation = f"""From following the smoke you enter
 an abandoned campsite, with 3 tents, a fire with a stove and some gear.
 You look around for the mountain climbers but they have vanished.
 
 Pondering what to do you look arround in the tents to find some bags,
-you look in one and you find a {random_item} and a Wrench. 
+you look in one and you find a {random_item} and a Pocket Knife. 
 Maybe this can be used.
 
 You look around some more to know for sure that the mountain climbers
@@ -408,7 +422,7 @@ Maybe you can repair the Tractor to make sure you can leave this place as fast a
 
     looking = """You look around in the barn to look for
 extra useful items. There is a lot of junk. So naturally 
-the only thing you can find is a somewhat old and rusted pocket knife. 
+the only thing you can find is a somewhat old and rusted Wrench. 
 This can come in handy later...
 """
 
@@ -416,14 +430,13 @@ This can come in handy later...
 Maybe if you use the Tools you found you can Fix the Transmission.
 """
 
-    fixing_transmission = """You remember that you picked up the Wrench from 
-the dissappeard mountain climbers. Using this Wrench you poke around to find the correct nut.
+    fixing_transmission = """You remember that you picked up the Wrench in the barn. Using this Wrench you poke around to find the correct nut.
 Fastening the nut using the Wrench, after some difficulty, the Tranmission is working now.
 Now you can get in the Tractor and drive to Exit the Barn.
 """
 
     print_words(intro)
-    current_items['pocket knife'] = True
+    current_items['wrench'] = True
     is_fixed = False
     opened_hood = False
     while is_fixed == False:
@@ -445,7 +458,7 @@ Now you can get in the Tractor and drive to Exit the Barn.
             print_words(not_valid)
 
 
-def ending():
+def ending(player):
     escaped_text = """You try countless times to stab the martian, but he
 blocks every attempt. After some time you begin to notice that the martian is easily
 distracted, so you say that there is a beatiful martian lady waiting for
@@ -482,6 +495,8 @@ martians. "Oh shit" you think.
 """
 
     random_end = escaped_text if random.randint(1,2) == 2 else awake_text
+    
+
 
     ending_text = f"""You're exiting the barn, you can hear some of
 the martians, and see them in your rear mirror. One is pretty fast which you didn't
@@ -500,6 +515,7 @@ def main():
     """
     De main game loop waar eigenlijk alles gebeurt en wordt aangeroepen.
     """
+    characters()
     # print de intro met een beetje backstory
     print_words(intro_text)
     current_room = "main" # zet de huidige kamer op main dat is waar je start
