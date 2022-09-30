@@ -10,7 +10,7 @@ current_items = {'chesspiece'   : False,
                  'wrench'       : False,
                  'pocket knife' : False}
 # random item om de speler in de maling te nemen wat later in het spel
-random_items = ['Lighter', '10 Euro Bill', 'Telephone']
+random_items = ['Lighter', '10 Euro Bill', 'Telephone', 'Carabiner', 'Rappel Device', 'Daisy Chain']
 # the titel van de game -- inspiratie https://en.wikipedia.org/wiki/The_War_of_the_Worlds
 title = """
  _______ _       __          __                   _   _           ____  _                              _                   
