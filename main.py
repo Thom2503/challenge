@@ -512,10 +512,12 @@ martians. "Oh shit" you think.
     -= THE ESCAPE FROM THE MOTHERSHIP =-
 """
     # we hebben twee verschillende verhalen waar het random op kan eindigen
-    random_end = escaped_text if random.randint(1,2) == 2 else awake_text
+    # de kans is op basis van de gekozen character in het begin
+    # de kans is of 75% 25% of 25% 75%
+    weights = (75, 25) if current_character.lower() in ("gary", "gary fox") else (25, 75)
+    endings = [escaped_text, awake_text]
+    random_end = random.choices(endings, cum_weights=weights, k=1)
     
-
-
     ending_text = f"""You're exiting the barn, you can hear some of
 the martians, and see them in your rear mirror. One is pretty fast which you didn't
 expect.
@@ -524,7 +526,7 @@ He jumps with you in the Tractor and begins to attack you to stop the Tractor an
 capture you. You take one hand from the steering wheel and you begin to grab for
 the old and rusted pocket knife. You begin to stab the martian.
 
-{random_end}
+{random_end[0]}
 """
     print_words(ending_text)
 
@@ -612,7 +614,7 @@ def main():
         elif current_room == "campsite" and command == "go to woods":
             current_room = "barn"
             barn()
-        elif current_room == "barn" and command == "exit barn":
+        elif command == "exit barn":
             ending()
             sys.exit(credits_screen()) # eindig de game en laat eerst de credits zien.
         else:
