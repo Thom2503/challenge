@@ -400,6 +400,9 @@ Woods to the base of the mountain.
     print_words(room_explenation)
 
 def barn():
+    """
+    Het verhaal in de schuur waar je paar handelingen moet doen om te ontsnappen.
+    """
     intro = """After some time walking you made it to the base of the mountain,
 wherer you see something that looks like a barn. You decide to enter it, inside are some Tools and a Tractor.
 You remember that is was supposed to be your Volvo V60.
@@ -423,9 +426,9 @@ Now you can get in the Tractor and drive to Exit the Barn.
 """
 
     print_words(intro)
-    current_items['pocket knife'] = True
-    is_fixed = False
-    opened_hood = False
+    current_items['pocket knife'] = True # dit heb je nodig in het einde
+    is_fixed = False # zodat je niet weg kan gaan zonder dat je de trekker hebt gefixt
+    opened_hood = False # je kan de trekker alleen fixen als je de motorklep geopent hebt
     while is_fixed == False:
         command = input("> ")
         command = command.lower()
@@ -446,6 +449,9 @@ Now you can get in the Tractor and drive to Exit the Barn.
 
 
 def ending():
+    """
+    Functie met het einde van het verhaal dit is ook met een totaal random einde.
+    """
     escaped_text = """You try countless times to stab the martian, but he
 blocks every attempt. After some time you begin to notice that the martian is easily
 distracted, so you say that there is a beatiful martian lady waiting for
@@ -480,7 +486,7 @@ martians. "Oh shit" you think.
       PART TWO COMING SPRING NEXT YEAR
     -= THE ESCAPE FROM THE MOTHERSHIP =-
 """
-
+    # we hebben twee verschillende verhalen waar het random op kan eindigen
     random_end = escaped_text if random.randint(1,2) == 2 else awake_text
 
     ending_text = f"""You're exiting the barn, you can hear some of
@@ -496,6 +502,42 @@ the old and rusted pocket knife. You begin to stab the martian.
     print_words(ending_text)
 
 
+def credits_screen():
+    """
+    Functie om random credits te maken om aan het einde van de game te laten zien.
+    """
+    # onze namen die random worden gekozen
+    names = ['Robin', 'Thom']
+    # de verschillende posities voor in de credits
+    credit_names = {'director' : None, 'lead_writer' : None, 'writer' : None,
+                    'lead_programmer' : None, 'programmer' : None, 'visual_effects' : None,
+                    'creature_design' : None}
+    # van verschillende rollen die worden genoemd bij game development maken
+    # we random omdat het geinig is en we evenveel hebben gedaan.
+    for role in credit_names:
+        credit_names[role] = random.choice(names)
+    # de daadwerkelijke credits
+    credits_text = f"""
+            Made possible by:
+
+        Director        - {credit_names['director']}
+        Lead writer     - {credit_names['lead_writer']}
+        Writer          - {credit_names['writer']}
+        Lead programmer - {credit_names['lead_programmer']}
+        Programmer      - {credit_names['programmer']}
+        Visual Effects  - {credit_names['visual_effects']}
+        Creature Design - {credit_names['creature_design']}
+        
+        First ending    - Thom
+        Second Ending   - Robin
+
+        Title made with Figlet
+        Ascii art       - SSt
+"""
+
+    print_words(credits_text)
+
+
 def main():
     """
     De main game loop waar eigenlijk alles gebeurt en wordt aangeroepen.
@@ -508,8 +550,7 @@ def main():
     while True:
         # vraag de input van de speler om te bepalen wat er dan moet gebeuren.
         # zet dit naar lowercase zodat je niet voor alle rand gevallen hoeft te checken.
-        command = input("> ")
-        command = command.lower()
+        command = input("> ").lower()
         # als je de game wilt eindigen.
         if command in ("q", "quit"):
             break
@@ -542,6 +583,7 @@ def main():
             barn()
         elif current_room == "barn" and command == "exit barn":
             ending()
+            sys.exit(credits_screen()) # eindig de game en laat eerst de credits zien.
         else:
             print_words(not_valid)
 
