@@ -94,15 +94,15 @@ def hint(room):
     elif room == "locker":
         print_words("Do you know that your coworker has a token?")
     elif room == "hall":
-        print_words("Have you tried not stepping on a mine.\n  or remember the patern.")
+        print_words("Have you tried not stepping on a mine.\nOr remember the patern.")
     elif room == "main gate":
-        print_words("Have you tried opening the gate when you think it's right.")
+        print_words("Have you tried opening the gate when you think it's right.\nAnd do you remember Binary?")
     elif room == "bridge":
         print_words("Have you tried to remember what you found?")
     elif room == "chessboard":
-        print_words("Have you tried doing the first move you would set.")
+        print_words("Have you tried doing the first move you would set.\nOr remember the story in the Lab room")
     elif room == "barn":
-        print_words("Have you tried looking around maybe you can find something.")
+        print_words("Have you tried looking around maybe you can find something.\nAnd what happened to the tractor?")
 
 
 def print_words(text):
@@ -614,7 +614,7 @@ def main():
         elif current_room == "campsite" and command == "go to woods":
             current_room = "barn"
             barn()
-        elif command == "exit barn":
+        elif current_room == "barn" and command == "exit barn":
             ending()
             sys.exit(credits_screen()) # eindig de game en laat eerst de credits zien.
         else:
