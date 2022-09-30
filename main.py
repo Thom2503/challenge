@@ -3,6 +3,7 @@ import sys
 import random
 
 current_room = "" # de huidige kamer waar je nu bent zodat je niet de hele game kan skippen
+current_character = "" # welke character je gekozen hebt.
 not_valid = "Not a valid command" # error als je niet een goed commando doorgeeft
 # dictionary met de items die je nodig hebt. Als het op true staat heb je de item
 current_items = {'chesspiece'   : False,
@@ -44,7 +45,6 @@ title_image = """
 """
 # de tekst waar je mee begint en die het verhaal een beetje uitlegd
 intro_text = f"""
-{title}
 {title_image}
 
 Welcome to the Observatory on top of the mountain,
@@ -56,19 +56,31 @@ If you need some help press h or type help.
 """
 
 def characters():
-    gary = """Gary Fox
-strength: luck and strength
-weakness: spiders and heigths
+    """
+    Functie om een character te kiezen heeft invloed op het einde
+    """
+    gary = """Gary Fox:
+Strengths : Very lucky and has great strength
+Weaknesses: Spiders and Heigths
 """
-    Wallace = """Wallace Bennett
-strength: endurance and good with nature
-weakness: lazy and Not taking criticism well
+    richard = """Richard Shezuan:
+Strengths : Good with nature and is the smartest man in the universe
+Weaknesses: Nihilism and Drinking
 """
-    print_words("choose your character")
+    print_words("Choose your character:\n")
     print_words(gary)
-    print_words(Wallace)
-    player = input("type here what character you want to play")
-    print_words(f"good job {player} is just what we needed for this adventure")
+    print_words(richard)
+    # om te checken dat je wel een character meegeeft
+    is_correct_input = False
+    # hou op met vragen als je echt een van de twee hebt gekozen
+    while is_correct_input == False:
+        player = input("Type here what character you want to play\n> ").lower()
+        if player in ("gary", "gary fox", "richard", "richard schezuan"):
+            print_words(f"Good job {player.capitalize()} is just what we needed for this adventure")
+            current_character = player
+            is_correct_input = True
+        else:
+            print_words("Not a character choose: Gary or Richard")
 
 def hint(room):
     """
@@ -557,6 +569,9 @@ def main():
     """
     De main game loop waar eigenlijk alles gebeurt en wordt aangeroepen.
     """
+    # print de titel als eerste want dat is wat de spelers eerst moeten zien.
+    print_words(title)
+    # kies een van de twee characters heeft invloed op het einde
     characters()
     # print de intro met een beetje backstory
     print_words(intro_text)
@@ -605,3 +620,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
